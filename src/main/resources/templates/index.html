@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<head xmlns:th="http://www.w3.org/1999/xhtml">
+    <meta charset="UTF-8">
+    <title>TEST HERE</title>
+</head>
+
+
+
+<script type="text/javascript" th:src="@{/js/jquery-3.4.0.js}"></script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        // get
+        $("#button_get").click(function(){
+            var url = window.location.href + document.getElementById("get_url").value;
+            $.ajax({
+                url:url,
+                datatype:"text",
+                success:function(result){
+                    alert(result);},
+                error:function(result){
+                    alert("error");
+                }
+            });
+
+        });
+        // post
+        $("#button_post").click(function(){
+            var url = window.location.href + document.getElementById("post_url").value;
+            var json = $.parseJSON( document.getElementById("post_textarea").value );
+            $.ajax({
+                type: "POST",
+                url: url,
+                datatype:"text",
+                data:JSON.stringify(json),
+                contentType:"application/json;charset=utf-8",
+                success:function(result){
+                    alert(result);
+                    },
+                error:function(result){
+                    alert("error");
+                }
+            })
+
+            // $.post(url, json,
+            //     function(data){
+            //         $("#result_post").html(data);
+            //     });
+        });
+    });
+</script>
+
+
+<p>
+<h2>
+    <strong>GET 测试 </strong>
+</h2>
+<div id="get">
+    <label>访问地址</label>
+    <input type="text" id="get_url" size=50 value="test" />
+    <button id="button_get" type="button">GET!</button>
+</div>
+</p>
+
+<p>
+</p>
+
+<p>
+<h2>
+    <strong>POST 测试 </strong>
+</h2>
+<div id="post">
+    <label>访问地址</label>
+    <input type="text" id="post_url", value="test" />
+    <br/>
+    <label>POST数据</label>
+    <textarea cols="40" rows="8" name="textarea" id="post_textarea">{"name":"M"}</textarea>
+    <br/>
+    <button id="button_post" type="button">POST!</button>
+</div>
+</p>
+
+
+</body>
+</html>

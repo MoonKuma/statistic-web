@@ -1,0 +1,34 @@
+
+info:
+  desc: gmtweb
+logging:
+  level:
+    root: info
+    org:
+      springframework:
+        jdbc:
+          core: DEBUG
+
+proxy:
+  enabled: false
+  host: 127.0.0.1
+  port: 8080
+
+spring:
+  redis:
+    host: 192.168.2.147
+    port: 6379
+    database: 2
+  datasource:
+    stat-base-source:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.2.175:3306/test_web
+      username: root
+      password: r00t
+    stat-pay-source:
+      driver-class-name: com.mysql.jdbc.Driver
+      url: jdbc:mysql://192.168.2.175:3306/test_web
+      username: root
+      password: r00t
+
+
