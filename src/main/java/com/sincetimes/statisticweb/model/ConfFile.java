@@ -19,6 +19,7 @@ public class ConfFile {
     private ClassPathResource resource;
 
     public String toString(){
+
         return "[Report] Your ConfFile now have a confMap with length: " +
                 confMap.keySet().size();
     }

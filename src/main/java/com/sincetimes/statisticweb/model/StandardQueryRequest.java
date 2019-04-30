@@ -46,7 +46,6 @@ public class StandardQueryRequest {
 
     private final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-
     public void setStartDate(String inputDate){
         Date datePre = null;
         if (inputDate != null && (!inputDate.trim().equalsIgnoreCase("null"))) {
@@ -94,7 +93,13 @@ public class StandardQueryRequest {
     public void setCheckDate(String inputDate)  {
         if (inputDate != null && (!inputDate.trim().equalsIgnoreCase("null"))) {
             try {
-                this.checkDate = sdf.parse(inputDate.trim());
+                Date datePre = sdf.parse(inputDate.trim());
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(datePre);
+                calendar.set(Calendar.HOUR_OF_DAY, 23);
+                calendar.set(Calendar.MINUTE, 59);
+                calendar.set(Calendar.SECOND, 59);
+                this.checkDate = calendar.getTime();
             } catch (Exception e) {
             }
         }

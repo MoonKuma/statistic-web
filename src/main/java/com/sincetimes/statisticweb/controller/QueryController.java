@@ -2,6 +2,7 @@ package com.sincetimes.statisticweb.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.sincetimes.statisticweb.dao.db.StatBaseDao;
 import com.sincetimes.statisticweb.model.JqgridData;
 import com.sincetimes.statisticweb.model.StandardQueryRequest;
 import com.sincetimes.statisticweb.service.query.DaySummaryService;
@@ -24,26 +25,29 @@ public class QueryController implements WebMvcConfigurer {
         return "list of basic query here";
     }
 
+    @Autowired
+    DaySummaryService daySummary;
 
     @GetMapping("/query/day_summary")
     @ResponseBody
     public List<JSONObject> daySummary(@RequestParam(required = false) StandardQueryRequest standardQueryRequest
-            , @Autowired DaySummaryService daySummary) {
+            ) {
         // return all basic query type
         return daySummary.getResult(standardQueryRequest).getData();
     }
 
-
+    @Autowired
+    TestService testService;
 
     @RequestMapping(path="/query/test_query")
     @ResponseBody
-    public List<JSONObject> testQuery(@RequestParam(required = false) String startDate,
+    public JSONObject testQuery(@RequestParam(required = false) String startDate,
                                       @RequestParam(required = false) String endDate,
                                       @RequestParam(required = false) String checkDate,
                                       @RequestParam(required = false) String[] channel,
                                       @RequestParam(required = false) String[] zoneid,
-                                      @Autowired TestService testService,
                                       HttpServletRequest request){
+
         String date = request.getParameter("checkDate");
         StandardQueryRequest standardQueryRequest = new StandardQueryRequest();
         standardQueryRequest.setChannels(channel);
@@ -51,7 +55,7 @@ public class QueryController implements WebMvcConfigurer {
         standardQueryRequest.setStartDate(startDate);
         standardQueryRequest.setEndDate(endDate);
         standardQueryRequest.setZoneids(zoneid);
-        return testService.getResult(standardQueryRequest).getData();
+        return testService.getResult(standardQueryRequest).getJsonData();
     }
 
 

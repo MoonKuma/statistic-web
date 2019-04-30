@@ -20,6 +20,22 @@ import javax.sql.DataSource;
 @Configuration
 public class JdbcConfig {
 
+
+
+    // *************** JdbcTemplate ****************
+    @Bean(name = "statBaseJdbcTemplate")
+    @Qualifier("statBaseJdbcTemplate")
+    public JdbcTemplate statBaseJdbcTemplate(
+            @Qualifier("statBaseSource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+    @Bean(name = "statPayJdbcTemplate")
+    @Qualifier("statPayJdbcTemplate")
+    public JdbcTemplate statPayJdbcTemplate(
+            @Qualifier("statPaySource") DataSource dataSource) {
+        return new JdbcTemplate(dataSource);
+    }
+
     // *************** Source ****************
     @Bean(name = "statBaseSource")
     @Qualifier("statBaseSource")
@@ -35,19 +51,6 @@ public class JdbcConfig {
         return DataSourceBuilder.create().build();
     }
 
-    // *************** JdbcTemplate ****************
-    @Bean(name = "statBaseJdbcTemplate")
-    @Qualifier("statBaseJdbcTemplate")
-    public JdbcTemplate statBaseJdbcTemplate(
-            @Qualifier("statBaseSource") DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
-    @Bean(name = "statPayJdbcTemplate")
-    @Qualifier("statPayJdbcTemplate")
-    public JdbcTemplate statPayJdbcTemplate(
-            @Qualifier("statPaySource") DataSource dataSource) {
-        return new JdbcTemplate(dataSource);
-    }
 
     // *************** NamedJdbcTemplate **************
     @Bean(name = "statBaseNamedParameterJdbcTemplate")

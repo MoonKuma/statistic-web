@@ -20,13 +20,16 @@ import java.util.Map;
 @Service
 public class TestService implements StandardQueryService {
 
-    private final StatBaseDao statBaseDao;
+
     private JSONObject rowJsonObject;
+
+    private final StatBaseDao statBaseDao;
 
     @Autowired
     public TestService(StatBaseDao statBaseDao) {
         this.statBaseDao = statBaseDao;
     }
+
 
     @Override
     public JqgridData getResult(StandardQueryRequest standardQueryRequest) {

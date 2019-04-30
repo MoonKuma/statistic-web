@@ -21,13 +21,13 @@ spring:
     database: 2
   datasource:
     stat-base-source:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.2.175:3306/test_web
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.2.175:3306/test_web
       username: root
       password: r00t
     stat-pay-source:
-      driver-class-name: com.mysql.jdbc.Driver
-      url: jdbc:mysql://192.168.2.175:3306/test_web
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://192.168.2.175:3306/test_web
       username: root
       password: r00t
 
