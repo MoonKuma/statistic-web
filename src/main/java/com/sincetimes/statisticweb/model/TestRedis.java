@@ -18,6 +18,12 @@ import java.io.Serializable;
  *
  * Guess what will happen if not?
  *
+ * There will be a run time exception like "SerializationFailedException:Failed to serialize object using DefaultSerializer"
+ * when trying to add it into cache.
+ *
+ * Compiler can't detect such error for 'implements Serializable' require nothing inside itself.
+ * It's simply a mark to tell which object is allowed to be serialized
+ *
  */
 
 

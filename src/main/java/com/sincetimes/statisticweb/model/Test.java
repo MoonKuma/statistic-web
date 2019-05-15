@@ -4,9 +4,11 @@ package com.sincetimes.statisticweb.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-public class Test {
+public class Test implements Serializable{
 
     private String name;
 

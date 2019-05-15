@@ -51,4 +51,17 @@ public class TestCacheService {
         return testRedis;
     }
 
+    public TestRedis saveWithoutCache(TestRedis testRedis) {
+        long delNum = testMongoDao.removeTest(testRedis.getId());
+        if (logger.isDebugEnabled()) {
+            logger.debug("removeTestInfo res:{}", delNum);
+        }
+        testMongoDao.insertTest(testRedis);
+        return testRedis;
+    }
+
+    public TestRedis getTestByIdWithoutCache(Long testId) {
+        logger.debug("Mongo查询testId：" + testId);
+        return testMongoDao.findTestById(testId);
+    }
 }

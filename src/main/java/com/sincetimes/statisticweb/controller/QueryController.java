@@ -66,10 +66,22 @@ public class QueryController implements WebMvcConfigurer {
         return testCacheService.getTestById(id);
     }
 
+    @RequestMapping(path="/query/test_nocache")
+    @ResponseBody
+    public TestRedis testQueryNoCache(@RequestParam(required = false) Long id){
+        return testCacheService.getTestByIdWithoutCache(id);
+    }
+
     @PostMapping(value = "/insert_cache")
     @ResponseBody
     public TestRedis insertTest(@RequestBody TestRedis testRedis) {
         return testCacheService.saveTestInfo(testRedis);
+    }
+
+    @PostMapping(value = "/insert_nocache")
+    @ResponseBody
+    public TestRedis insertTestNoCache(@RequestBody TestRedis testRedis) {
+        return testCacheService.saveWithoutCache(testRedis);
     }
 
 }
