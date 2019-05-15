@@ -4,6 +4,7 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -15,7 +16,11 @@ import java.nio.charset.Charset;
 /**
  * @author MoonKuma
  * @since 2019/4/25
+ *
+ * @Configuration is necessary, or this class will not be initialized when spring starts
+ *
  */
+@Configuration
 public class RedisConfig {
     @Bean
     public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) throws UnknownHostException {
@@ -28,7 +33,7 @@ public class RedisConfig {
         template.setHashKeySerializer(stringSerializer);
 
         // value值的序列化采用fastJsonRedisSerializer
-        FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
+            FastJsonRedisSerializer fastJsonRedisSerializer = new FastJsonRedisSerializer(Object.class);
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setCharset(Charset.forName("UTF-8"));
 //        fastJsonConfig.setSerializerFeatures(

@@ -1,8 +1,7 @@
 package com.sincetimes.statisticweb.service.query;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sincetimes.statisticweb.dao.db.StatBaseDao;
+import com.sincetimes.statisticweb.dao.jdbc.StatBaseDao;
 import com.sincetimes.statisticweb.model.JqgridData;
 import com.sincetimes.statisticweb.model.StandardQueryRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,7 +17,7 @@ import java.util.Map;
  */
 
 @Service
-public class TestService implements StandardQueryService {
+public class TestSqlService implements StandardQueryService {
 
 
     private JSONObject rowJsonObject;
@@ -26,7 +25,7 @@ public class TestService implements StandardQueryService {
     private final StatBaseDao statBaseDao;
 
     @Autowired
-    public TestService(StatBaseDao statBaseDao) {
+    public TestSqlService(StatBaseDao statBaseDao) {
         this.statBaseDao = statBaseDao;
     }
 

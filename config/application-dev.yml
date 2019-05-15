@@ -1,6 +1,6 @@
 
 info:
-  desc: gmtweb
+  desc: statistic-web
 logging:
   level:
     root: info
@@ -19,6 +19,12 @@ spring:
     host: 192.168.2.147
     port: 6379
     database: 2
+    password: sincetimes123456
+  data:
+    mongodb:
+      host: 192.168.2.175
+      port: 27017
+      database: gmt_test
   datasource:
     stat-base-source:
       driver-class-name: com.mysql.cj.jdbc.Driver

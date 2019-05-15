@@ -1,15 +1,11 @@
-package com.sincetimes.statisticweb.dao.db;
+package com.sincetimes.statisticweb.dao.jdbc;
 
 
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -35,7 +31,7 @@ public class SqlDao {
 
     // Adding those result from sql with not parameters into Cache
     // Insert and delete does not work well for their original return is an int value indicate the line number
-    // Stupid idea of using KV cache inside a SQL db
+    // Stupid idea of using KV cache inside a SQL jdbc
     @Cacheable(key = "#sql.toString()", condition = "#parameters.getValues().size() == 0", unless = "#result == null")
     public List<Map<String, Object>> selectCache(String sql, MapSqlParameterSource parameters){
         return this.select(sql, parameters);

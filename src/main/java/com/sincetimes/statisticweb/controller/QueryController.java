@@ -1,12 +1,11 @@
 package com.sincetimes.statisticweb.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.sincetimes.statisticweb.dao.db.StatBaseDao;
-import com.sincetimes.statisticweb.model.JqgridData;
 import com.sincetimes.statisticweb.model.StandardQueryRequest;
+import com.sincetimes.statisticweb.model.TestRedis;
 import com.sincetimes.statisticweb.service.query.DaySummaryService;
-import com.sincetimes.statisticweb.service.query.TestService;
+import com.sincetimes.statisticweb.service.query.TestCacheService;
+import com.sincetimes.statisticweb.service.query.TestSqlService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +36,7 @@ public class QueryController implements WebMvcConfigurer {
     }
 
     @Autowired
-    TestService testService;
+    TestSqlService testSqlService;
 
     @RequestMapping(path="/query/test_query")
     @ResponseBody
@@ -55,8 +54,22 @@ public class QueryController implements WebMvcConfigurer {
         standardQueryRequest.setStartDate(startDate);
         standardQueryRequest.setEndDate(endDate);
         standardQueryRequest.setZoneids(zoneid);
-        return testService.getResult(standardQueryRequest).getJsonData();
+        return testSqlService.getResult(standardQueryRequest).getJsonData();
     }
 
+    @Autowired
+    TestCacheService testCacheService;
+
+    @RequestMapping(path="/query/test_cache")
+    @ResponseBody
+    public TestRedis testQueryCache(@RequestParam(required = false) Long id){
+        return testCacheService.getTestById(id);
+    }
+
+    @PostMapping(value = "/insert_cache")
+    @ResponseBody
+    public TestRedis insertTest(@RequestBody TestRedis testRedis) {
+        return testCacheService.saveTestInfo(testRedis);
+    }
 
 }

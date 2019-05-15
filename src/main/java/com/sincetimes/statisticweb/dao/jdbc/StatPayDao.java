@@ -1,4 +1,4 @@
-package com.sincetimes.statisticweb.dao.db;
+package com.sincetimes.statisticweb.dao.jdbc;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
